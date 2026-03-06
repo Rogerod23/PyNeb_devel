@@ -1,0 +1,12 @@
+name: pyneb
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - numpy
+  - matplotlib
+  - scipy
+  - h5py
+  - pip:
+     - pyneb
