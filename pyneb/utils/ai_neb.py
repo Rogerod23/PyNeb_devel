@@ -80,7 +80,7 @@ class manage_RM(object):
         self.train_scaled = False
         self.test_scaled = False
         self.isfin = None
-        self.RM_type = "SK_ANN"
+        #self.RM_type = "SK_ANN"
         self.X_train = self._copy_None(X_train)
         self.y_train = self._copy_None(y_train)
         self.X_test = self._copy_None(X_test)
@@ -176,9 +176,8 @@ class manage_RM(object):
         self.RMs = []
         self.train_params = {}
         self._multi_predic = False
-        if self.RM_type in ('SK_ANN'):
-            self.RMs = [MLPRegressor(random_state=self.random_seed, **kwargs)]
-            self._multi_predic = True
+        self.RMs = [MLPRegressor(random_state=self.random_seed, **kwargs)]
+        self._multi_predic = True
 
         
 
@@ -379,7 +378,7 @@ class manage_RM(object):
         
 
         to_save = [
-                    self.RM_version, self.RM_type,
+                    self.RM_version,
                     X_train, y_train, X_test, y_test,
                     self.scaling, self.use_log,
                     self.train_scaled, self.test_scaled,
@@ -393,14 +392,15 @@ class manage_RM(object):
                     self.random_seed,
                     self.RMs
                 ]
-        
-        if self.RM_type[0:3] == 'SK_': 
-            joblib.dump(to_save, filename+'.ai4neb_sk', **kwargs)
-            if self.verbose:
-                print('RM save to {}.ai4neb_sk'.format(filename))
 
-        else:
-           print('Do not know how to save {} machine'.format(self.RM_type))
+        joblib.dump(to_save, filename+".ai4neb_sk", **kwargs)
+        # if self.RM_type[0:3] == 'SK_': 
+        #     joblib.dump(to_save, filename+'.ai4neb_sk', **kwargs)
+        #     if self.verbose:
+        #         print('RM save to {}.ai4neb_sk'.format(filename))
+
+        # else:
+        #    print('Do not know how to save {} machine'.format(self.RM_type))
                     
     def load_RM(self, filename='RM', notry=False, compile_=False):
         """
@@ -450,8 +450,8 @@ class manage_RM(object):
             print('WARNING: version loaded from {} is {}. Version from RM class is {}.'.format(to_read, 
                                                                   load_version, self.RM_version))
         
-        if load_version in ("0.17"):
-            (self.RM_version, self.RM_type, 
+        if load_version == "0.17":
+            (self.RM_version, 
                    self.X_train, self.y_train, self.X_test, self.y_test,
                    self.scaling,  
                    self.use_log, 
@@ -475,7 +475,7 @@ class manage_RM(object):
             self.y_train_unscaled = self.y_train
         self.model_read =True
         
-def score(RM, X, y_true, axis=None, predict_functional=False):
+def score(RM, X, y_true, axis=None):
     """
     (1 - u/v), where u is the residual sum of squares ((y_true - y_pred) ** 2).sum() 
     and v is the total sum of squares ((y_true - y_true.mean()) ** 2).sum().
