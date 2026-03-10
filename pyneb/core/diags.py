@@ -194,7 +194,7 @@ class Diagnostics(object):
             self.addAll()
         self.ANN_n_tem=30
         self.ANN_n_den=30
-        self.ANN_inst_kwargs = {'RM_type' : 'SK_ANN', 
+        self.ANN_inst_kwargs = {
                                 'verbose' : False, 
                                 'scaling' : True,
                                 'use_log' : True,
@@ -784,15 +784,7 @@ class Diagnostics(object):
                 self.log_.error('Internal ANN module not found.',
                         calling=self.calling)
                 return None
-        # if use_ANN:
 
-        #     if config.INSTALLED['ai4neb']:
-        #         from ai4neb import manage_RM
-
-        #     if not config.INSTALLED['ai4neb']:
-        #         self.log_.error('_getPopulations_ANN cannot be used in absence of ai4neb package',
-        #                       calling=self.calling)
-        #         return None
             if start_tem == -1:
                 tem_min = 3000.
             else:

@@ -46,8 +46,7 @@ if config.INSTALLED['astropy Table']:
     from astropy.table import Table #, Column
 if config.INSTALLED['h5py']:
     import h5py
-# if config.INSTALLED['ai4neb']:
-#     from ai4neb import manage_RM
+
 
 # Change the profiler to 'cpu', 'mem' or None to profile the execution of Atom.
 profiler = None
@@ -1639,7 +1638,7 @@ class Atom(object):
         
         self.ANN_n_temden=30
         #need to be edited because RM_type is going to  be removed
-        self.ANN_inst_kwargs = {'RM_type' : 'SK_ANN', 
+        self.ANN_inst_kwargs = { 
                                 'verbose' : False, 
                                 'scaling' : True,
                                 'use_log' : True
@@ -1650,7 +1649,7 @@ class Atom(object):
                                 'tol' : 1e-6,
                                 'max_iter' : 20000
                                 }
-        self.ANN_Pop_inst_kwargs = {'RM_type' : 'SK_ANN', 
+        self.ANN_Pop_inst_kwargs = { 
                                 'verbose' : False, 
                                 'scaling' : True,
                                 'use_log' : True
@@ -1929,12 +1928,6 @@ class Atom(object):
         """
         Private method to obtain level population using Artificial Neuron Network.
         """
-        # if not config.INSTALLED['ai4neb']:
-        #     self.log_.error('_getPopulations_ANN cannot be used if ai4neb is not imported. Try to run pn.config.import_AI4Neb().',
-        #                   calling=self.calling)
-        #     return None
-        # else:
-        #     from ai4neb import manage_RM
         from pyneb.utils.ai_neb import manage_RM
         
         N = 5000
@@ -2591,13 +2584,6 @@ class Atom(object):
     @profile
     def _getTemDen_ANN(self, int_ratio, tem= -1, den= -1, lev_i1= -1, lev_j1= -1, lev_i2= -1, lev_j2= -1,
                   wave1= -1, wave2= -1, log=True, start_x= -1, end_x= -1, to_eval=None):
-        #TO BE REMOVED
-        # if not config.INSTALLED['ai4neb']:
-        #     self.log_.error('_getTemDen_ANN cannot be used if ai4neb is not imported. Try to run pn.config.import_AI4Neb().',
-        #                   calling=self.calling)
-        #     return None
-        # else:
-        #     from ai4neb import manage_RM
 
         from pyneb.utils.ai_neb import manage_RM
 
