@@ -377,18 +377,6 @@ class manage_RM(object):
         else:
             X_test, y_test = None, None
         
-        # to_save = [self.RM_version, self.RM_type, 
-        #            X_train, y_train, X_test, y_test,
-        #            self.scaling, 
-        #            self.use_log, 
-        #            self.train_scaled, self.test_scaled,
-        #            self.scaler,  
-        #            self.N_in, self.N_out, self.N_in_test, self.N_out_test,
-        #            self.N_test, self.N_test_y, self.N_train, self.N_train_y,
-        #            self.train_score, self._multi_predic,
-        #            self.trained, self.training_time,
-        #            self.random_seed 
-        #            ]
 
         to_save = [
                     self.RM_version, self.RM_type,
