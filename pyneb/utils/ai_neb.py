@@ -32,11 +32,10 @@ except:
 
 
 
-"begins main class for the regressor model"
 
 class manage_RM(object):
     """
-    Manage Regression Model from SciKit learn and Tensorflow via Keras.
+    Regression model based on scikit-learn MLPRegressor
     """
 
     def __init__(self,
@@ -130,11 +129,6 @@ class manage_RM(object):
             self.N_test, self.N_in_test = get_shape(self.X_test)
             self.N_test_y, self.N_out_test = get_shape(self.y_test)
         
-    def _len_None(self, v):
-        if v is None:
-            return 0
-        else:
-            return len(v)
         
     def _copy_None(self, v, add_dim=True):
         if v is None:
@@ -422,10 +416,10 @@ class manage_RM(object):
         """
         files = glob("{}.*".format(filename))
         
-        format_to_read = None
+        
         if "{}.ai4neb_sk".format(filename) in files:
             to_read = "{}.ai4neb_sk".format(filename)
-            format_to_read = 'SK'
+            
 
         else:
             to_read = None
